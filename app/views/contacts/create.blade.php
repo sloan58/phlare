@@ -1,0 +1,32 @@
+@extends('site.layouts.default')
+
+{{-- Content --}}
+@section('content')
+
+<!-- content -->
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1>Create a Contact</h1>
+
+        <!-- if there are creation errors, they will show here -->
+        {{ HTML::ul($errors->all()) }}
+
+        {{ Form::open(array('url' => 'contacts')) }}
+
+            <div class="form-group">
+                {{ Form::label('name', 'Name') }}
+                {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
+            </div>
+
+            <div class="form-group">
+                {{ Form::label('number', 'number') }}
+                {{ Form::text('number', Input::old('number'), array('class' => 'form-control')) }}
+            </div>
+
+            {{ Form::submit('Create the contact!', array('class' => 'btn btn-primary')) }}
+
+        {{ Form::close() }}
+
+    </div>
+</div>
