@@ -10,7 +10,15 @@ class ContactController extends \BaseController {
 	public function index()
 	{
         // get all the contacts
-        $contacts = Contact::all();
+        if (Auth::user()->username == 'admin') {
+
+            $contacts = Contact::all();
+
+        } else {
+
+            $contacts = Auth::user()->contacts;
+
+        }
 
         // load the view and pass the nerds
         return View::make('contacts.index')
@@ -51,10 +59,11 @@ class ContactController extends \BaseController {
                 ->withInput(Input::except('password'));
         } else {
             // store
-            $nerd = new Contact;
-            $nerd->name = Input::get('name');
-            $nerd->number = Input::get('number');
-            $nerd->save();
+            $contact = new Contact;
+            $contact->name = Input::get('name');
+            $contact->number = Input::get('number');
+            $contact->user_id = Auth::user()->id;
+            $contact->save();
 
             // redirect
             Session::flash('message', 'Successfully created contact!');

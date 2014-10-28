@@ -104,4 +104,11 @@ class User extends ConfideUser implements UserInterface, RemindableInterface{
         return $this->email;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contacts()
+    {
+        return $this->hasMany('Contact');
+    }
 }
