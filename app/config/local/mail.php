@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'phlare.info@gmail.com',
+	'username' => getenv('MAIL_USERNAME'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,6 +93,6 @@ return array(
 	|
 	*/
 
-	'password' => 'PhL@43!!',
+	'password' => getenv('MAIL_PASSWORD'),
 
 );

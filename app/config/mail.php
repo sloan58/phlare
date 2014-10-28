@@ -80,19 +80,19 @@ return array(
 	|
 	*/
 
-	'username' => null,
+    'username' => getenv('MAIL_USERNAME'),
 
-	/*
-	|--------------------------------------------------------------------------
-	| SMTP Server Password
-	|--------------------------------------------------------------------------
-	|
-	| Here you may set the password required by your SMTP server to send out
-	| messages from your application. This will be given to the server on
-	| connection so that the application will be able to send messages.
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | SMTP Server Password
+    |--------------------------------------------------------------------------
+    |
+    | Here you may set the password required by your SMTP server to send out
+    | messages from your application. This will be given to the server on
+    | connection so that the application will be able to send messages.
+    |
+    */
 
-	'password' => null,
+    'password' => getenv('MAIL_PASSWORD'),
 
 );
