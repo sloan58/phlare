@@ -20,7 +20,7 @@
             </div>
 
             <div class="form-group">
-                {{ Form::label('number', 'number') }}
+                {{ Form::label('number', 'Telephone Number') }}
                 {{ Form::text('number', Input::old('number'), array('class' => 'form-control')) }}
             </div>
 

@@ -9,7 +9,7 @@
 
     <div class="col-md-8 col-md-offset-2">
 
-    <h1>Edit {{ $contact->name }}</h1>
+    <h1>Edit: {{ $contact->name }}</h1>
     
     <!-- if there are creation errors, they will show here -->
     {{ HTML::ul($errors->all()) }}
@@ -22,7 +22,7 @@
         </div>
     
         <div class="form-group">
-            {{ Form::label('number', 'number') }}
+            {{ Form::label('number', 'Telephone Number') }}
             {{ Form::text('number', null, array('class' => 'form-control')) }}
         </div>
 

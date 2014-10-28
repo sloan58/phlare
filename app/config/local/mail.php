@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'martinsloan58@gmail.com',
+	'username' => 'phlare.info@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,6 +93,6 @@ return array(
 	|
 	*/
 
-	'password' => 'Sl0anLa8s',
+	'password' => 'PhL@43!!',
 
 );

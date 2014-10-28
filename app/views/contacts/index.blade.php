@@ -9,6 +9,13 @@
 
     <div class="col-md-8 col-md-offset-2">
 
+        <div class="row">
+            <div class="col-md-2">
+                <a class="btn btn-small btn-success" href="{{ URL::to('contacts/create') }}">Create New Contact</a>
+            </div>
+        </div>
+
+        @if (count($contacts) > 0)
         <h1>All Contacts</h1>
 
         <!-- will be used to show any messages -->
@@ -19,7 +26,6 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <td>ID</td>
                     <td>Name</td>
                     <td>Telephone Number</td>
                     <td></td>
@@ -28,7 +34,6 @@
             <tbody>
             @foreach($contacts as $key => $value)
                 <tr>
-                    <td>{{ $value->id }}</td>
                     <td>{{ $value->name }}</td>
                     <td>{{ $value->number }}</td>
 
@@ -53,6 +58,7 @@
             @endforeach
             </tbody>
         </table>
+        @endif
     </div>
 </div>
 <!-- ./ content -->
