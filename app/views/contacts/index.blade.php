@@ -39,7 +39,7 @@
             @foreach($contacts as $key => $value)
                 <tr>
                     <td>{{ $value->name }}</td>
-                    <td><a href="tel:{{ $value->number }}">Call {{ $value->number }}</a></td>
+                    <td><a href="tel:{{ $value->number }}">{{ $value->number }}</a></td>
 
                     <!-- we will also add show, edit, and delete buttons -->
                     <td>
