@@ -1,5 +1,9 @@
 @extends('site.layouts.default')
 
+@section('title')
+    Phlare::Contacts
+@stop
+
 {{-- Content --}}
 @section('content')
 
@@ -10,6 +14,16 @@
     <div class="col-md-8 col-md-offset-2">
 
         <div class="row">
+
+            @if(count($contacts) === 0)
+            <div class="col-md-4">
+                <h2>Start Here!</h2>
+            </div>
+            @endif
+        </div>
+
+        <div class="row">
+
             <div class="col-md-2">
                 <a class="btn btn-small btn-success" href="{{ URL::to('contacts/create') }}">Create New Contact</a>
             </div>

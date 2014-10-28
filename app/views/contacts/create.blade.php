@@ -1,5 +1,7 @@
 @extends('site.layouts.default')
-
+@section('title')
+    Phlare::Contacts::Add
+@stop
 {{-- Content --}}
 @section('content')
 
