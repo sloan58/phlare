@@ -15,21 +15,11 @@
 
         <div class="row">
 
-            @if(count($contacts) === 0)
-            <div class="col-md-4">
-                <h2>Start Here!</h2>
-            </div>
-            @endif
-        </div>
-
-        <div class="row">
-
             <div class="col-md-2">
                 <a class="btn btn-small btn-success" href="{{ URL::to('contacts/create') }}">Create New Contact</a>
             </div>
         </div>
 
-        @if (count($contacts) > 0)
         <h1>All Contacts</h1>
 
         <!-- will be used to show any messages -->
@@ -72,7 +62,6 @@
             @endforeach
             </tbody>
         </table>
-        @endif
     </div>
 </div>
 <!-- ./ content -->

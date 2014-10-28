@@ -8,7 +8,7 @@
 <!-- content -->
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-4 col-md-offset-4">
         <h1>Create a Contact</h1>
 
         <!-- if there are creation errors, they will show here -->
