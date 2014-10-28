@@ -14,6 +14,7 @@ class ContactController extends \BaseController {
 
             $contacts = Contact::all();
 
+        // get just the users contacts
         } else {
 
             $contacts = Auth::user()->contacts;
