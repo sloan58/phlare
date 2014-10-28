@@ -85,10 +85,14 @@ Route::get('contact-us', function()
 });
 
 #Contacts Route
-Route::resource('contacts', 'ContactController');
+Route::group(array('before'=>'auth'), function() {
+    Route::resource('contacts', 'ContactController');
+});
 
 #Twilio Route
-Route::resource('twilio', 'TwilioController');
+Route::group(array('before'=>'auth'), function() {
+    Route::resource('twilio', 'TwilioController');
+});
 
 # Index Page - Last route, no matches
 Route::get('/', array('before' => 'detectLang','auth','uses' => 'MainController@getIndex'));
