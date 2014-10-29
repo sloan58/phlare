@@ -64,13 +64,15 @@ class ContactController extends \BaseController {
             $contact->name = Input::get('name');
             $contact->number = Input::get('number');
             $contact->user_id = Auth::user()->id;
-            $letters = str_split($contact->name);
-            foreach ($letters as $i)
-            {
-                $profile[] = DB::table('keymaps')->where('letter',$i)->pluck('number');
-            }
-            $profile = implode("",$profile);
-            $contact->dial_profile = $profile;
+
+//            foreach (str_split($contact->name) as $i)
+//            {
+//                $profile[] = DB::table('keymaps')->where('letter',$i)->pluck('number');
+//            }
+//
+//            $profile = implode("",$profile);
+//            $contact->dial_profile = $profile;
+            $contact->dial_profile = '62789';
             $contact->save();
 
             // redirect
