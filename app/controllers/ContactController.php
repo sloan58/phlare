@@ -10,8 +10,6 @@ class ContactController extends \BaseController {
 	public function index()
 	{
 
-        dd(DB::table('keymaps')->get());
-
         // get all the contacts
         if (Auth::user()->username == 'admin') {
 
@@ -70,9 +68,12 @@ class ContactController extends \BaseController {
 
             foreach (str_split($contact->name) as $i)
             {
-                $profile[] = DB::table('keymaps')->where('letter',$i)->pluck('number');
+//                $profile[] = DB::table('keymaps')->where('letter',$i)->pluck('number');
+                $profile[] = 'value';
             }
 
+            dd($profile);
+            
             $dial_profile = implode("",$profile);
             $contact->dial_profile = $dial_profile;
             $contact->save();
