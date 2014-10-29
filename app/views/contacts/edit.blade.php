@@ -30,6 +30,11 @@
             {{ Form::text('number', null, array('class' => 'form-control')) }}
         </div>
 
+        <div class="form-group">
+            {{ Form::label('dial_profile', 'Dial Profile') }}
+            {{ Form::text('dial_profile', null, array('class' => 'form-control')) }}
+        </div>
+
         {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
     
     {{ Form::close() }}
