@@ -90,7 +90,29 @@ Route::group(array('before'=>'auth'), function() {
 });
 
 #Twilio Route
-Route::resource('twilio', 'TwilioController');
+//Route::resource('twilio', 'TwilioController');
+Route::get('twilio', function () {
+
+    $twiml = new Services_Twilio_Twiml();
+    $gather = $twiml->gather(array('numDigits' => 5));
+    $gather->say("Hello Caller");
+    return $twiml;
+
+});
+
+Route::post('twilio', function () {
+
+    $digits = Input::get('Digits');
+
+    $name = DB::table('contacts')->where('dial_profile',$digits)->pluck('name');
+
+    $twiml = new Services_Twilio_Twiml();
+    $twiml->say('Hello - your app just answered the phone and got ' . $name . ' from the database!', array('voice' => 'alice'));
+    $response = Response::make($twiml, 200);
+    $response->header('Content-Type', 'text/xml');
+    return $response;
+
+});
 
 # Index Page - Last route, no matches
 Route::get('/', array('before' => 'detectLang','auth','uses' => 'MainController@getIndex'));
