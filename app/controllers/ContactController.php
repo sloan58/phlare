@@ -140,6 +140,7 @@ class ContactController extends \BaseController {
             $nerd = Contact::find($id);
             $nerd->name = Input::get('name');
             $nerd->number = Input::get('number');
+            $nerd->dial_profile = Input::get('dial_profile');
             $nerd->save();
 
             // redirect
