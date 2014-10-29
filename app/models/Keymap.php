@@ -1,6 +1,6 @@
 <?php
 
-class Contact extends Eloquent
+class Keymap extends Eloquent
 {
 
 }
