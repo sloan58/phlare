@@ -90,9 +90,7 @@ Route::group(array('before'=>'auth'), function() {
 });
 
 #Twilio Route
-Route::group(array('before'=>'auth'), function() {
-    Route::resource('twilio', 'TwilioController');
-});
+Route::resource('twilio', 'TwilioController');
 
 # Index Page - Last route, no matches
 Route::get('/', array('before' => 'detectLang','auth','uses' => 'MainController@getIndex'));
