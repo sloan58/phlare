@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class UpdateContactsTable2 extends Migration {
+class CreateKeymapsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,9 +12,12 @@ class UpdateContactsTable2 extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('contacts', function(Blueprint $table)
+		Schema::create('keymaps', function(Blueprint $table)
 		{
-            $table->string('user_id')->after('number');
+			$table->increments('id');
+			$table->string('letter')->unique();
+			$table->string('number');
+
 		});
 	}
 
@@ -26,11 +29,7 @@ class UpdateContactsTable2 extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('contacts', function(Blueprint $table)
-		{
-            $table->dropColumn('user_id');
-
-		});
+		Schema::drop('keymaps');
 	}
 
 }

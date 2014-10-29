@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class UpdateContactsTable2 extends Migration {
+class UpdateContactsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -14,7 +14,7 @@ class UpdateContactsTable2 extends Migration {
 	{
 		Schema::table('contacts', function(Blueprint $table)
 		{
-            $table->string('user_id')->after('number');
+            $table->string('dial_profile')->after('user_id');
 		});
 	}
 
@@ -28,8 +28,8 @@ class UpdateContactsTable2 extends Migration {
 	{
 		Schema::table('contacts', function(Blueprint $table)
 		{
-            $table->dropColumn('user_id');
-
+            $table->dropColumn('dial_profile');
+            
 		});
 	}
 
