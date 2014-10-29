@@ -9,6 +9,9 @@ class ContactController extends \BaseController {
 	 */
 	public function index()
 	{
+
+        dd(DB::table('keymaps')->get());
+
         // get all the contacts
         if (Auth::user()->username == 'admin') {
 
@@ -72,7 +75,6 @@ class ContactController extends \BaseController {
 
             $dial_profile = implode("",$profile);
             $contact->dial_profile = $dial_profile;
-//            $contact->dial_profile = '62789';
             $contact->save();
 
             // redirect
