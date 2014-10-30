@@ -72,9 +72,10 @@ class ContactController extends \BaseController {
                 $profile[] = 'value';
             }
 
-            dd($profile);
-            
             $dial_profile = implode("",$profile);
+
+            dd($dial_profile);
+
             $contact->dial_profile = $dial_profile;
             $contact->save();
 
