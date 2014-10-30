@@ -66,11 +66,11 @@ class ContactController extends \BaseController {
             $contact->number = Input::get('number');
             $contact->user_id = Auth::user()->id;
 
-            $dial_profile = '';
+            $dial_profile = [];
 
             foreach (str_split($contact->name) as $i)
             {
-                $dial_profile .= DB::table('keymaps')->where('letter',$i)->pluck('number');
+                $dial_profile[] = DB::table('keymaps')->where('letter',$i)->pluck('number');
             }
 
 //            $dial_profile = implode($profile);
