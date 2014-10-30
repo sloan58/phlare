@@ -60,6 +60,7 @@ class ContactController extends \BaseController {
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         } else {
+
             // store
             $contact = new Contact;
             $contact->name = Input::get('name');
@@ -72,8 +73,6 @@ class ContactController extends \BaseController {
             }
 
             $dial_profile = implode($profile);
-
-            dd($dial_profile);
 
             $contact->dial_profile = $dial_profile;
             $contact->save();
