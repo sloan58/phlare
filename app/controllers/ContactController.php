@@ -71,9 +71,9 @@ class ContactController extends \BaseController {
                 $profile[] = DB::table('keymaps')->where('letter',$i)->pluck('number');
             }
 
-            $dial_profile = implode("",$profile);
+            $dial_profile = implode($profile);
 
-            dd($dial_profile);
+//            dd($dial_profile);
 
             $contact->dial_profile = $dial_profile;
             $contact->save();
