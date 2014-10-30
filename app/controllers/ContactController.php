@@ -66,6 +66,8 @@ class ContactController extends \BaseController {
             $contact->number = Input::get('number');
             $contact->user_id = Auth::user()->id;
 
+            $profile = [];
+
             foreach (str_split($contact->name) as $i)
             {
                 $profile[] = DB::table('keymaps')->where('letter',$i)->pluck('number');
