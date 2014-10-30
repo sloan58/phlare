@@ -107,7 +107,7 @@ Route::post('twilio', function () {
     $name = DB::table('contacts')->where('dial_profile',$digits)->pluck('name');
 
     $twiml = new Services_Twilio_Twiml();
-    $twiml->say('Okay, I got the name ' . $name . ' from the database based on the digits you pressed!  Goodbye.', array('voice' => 'alice'));
+    $twiml->say('Okay, I got the name ' . $name . ' from the database based on the digits you pressed!  Goodbye.');
     $response = Response::make($twiml, 200);
     $response->header('Content-Type', 'text/xml');
     return $response;
