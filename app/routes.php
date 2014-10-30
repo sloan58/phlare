@@ -94,8 +94,8 @@ Route::group(array('before'=>'auth'), function() {
 Route::get('twilio', function () {
 
     $twiml = new Services_Twilio_Twiml();
-    $gather = $twiml->gather(array('numDigits' => 5));
-    $gather->say("Hello Caller");
+    $gather = $twiml->gather(array('numDigits' => 50));
+    $gather->say("Hello Caller, enter the name of the person you're trying to reach, followed by the pound sign.");
     return $twiml;
 
 });
@@ -107,7 +107,7 @@ Route::post('twilio', function () {
     $name = DB::table('contacts')->where('dial_profile',$digits)->pluck('name');
 
     $twiml = new Services_Twilio_Twiml();
-    $twiml->say('Hello - your app just answered the phone and got ' . $name . ' from the database!', array('voice' => 'alice'));
+    $twiml->say('Okay, I got the name ' . $name . ' from the database based on the digits you pressed!  Goodbye.', array('voice' => 'alice'));
     $response = Response::make($twiml, 200);
     $response->header('Content-Type', 'text/xml');
     return $response;

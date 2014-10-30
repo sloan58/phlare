@@ -141,11 +141,20 @@ class ContactController extends \BaseController {
                 ->withInput(Input::except('password'));
         } else {
             // store
-            $nerd = Contact::find($id);
-            $nerd->name = Input::get('name');
-            $nerd->number = Input::get('number');
-            $nerd->dial_profile = Input::get('dial_profile');
-            $nerd->save();
+            $contact = Contact::find($id);
+            $contact->name = Input::get('name');
+
+            foreach (str_split($contact->name) as $i)
+            {
+                $profile[] = DB::table('keymaps')->where('letter',strtoupper($i))->pluck('number');
+            }
+
+            $dial_profile = implode($profile);
+
+            $contact->dial_profile = $dial_profile;
+
+            $contact->number = Input::get('number');
+            $contact->save();
 
             // redirect
             Session::flash('message', 'Successfully updated contact!');
