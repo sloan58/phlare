@@ -68,8 +68,7 @@ class ContactController extends \BaseController {
 
             foreach (str_split($contact->name) as $i)
             {
-//                $profile[] = DB::table('keymaps')->where('letter',$i)->pluck('number');
-                $profile[] = 'value';
+                $profile[] = DB::table('keymaps')->where('letter',$i)->pluck('number');
             }
 
             $dial_profile = implode("",$profile);
