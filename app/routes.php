@@ -86,40 +86,23 @@ Route::get('contact-us', function()
 
 #Contacts Route
 Route::group(array('before'=>'auth'), function() {
+
     Route::resource('contacts', 'ContactController');
-});
-
-#Twilio Route
-//Route::resource('twilio', 'TwilioController');
-Route::get('twilio', function () {
-
-    $twiml = new Services_Twilio_Twiml();
-    $gather = $twiml->gather(['numDigits' => 50]);
-    $gather->say("Hello Caller, please enter the name of the person you're trying to reach, followed by the pound sign.");
-    return $twiml;
 
 });
 
-Route::post('twilio', function () {
+#Twilio Routes
+Route::group(['prefix' => 'twilio'], function(){
 
-    $digits = Input::get('Digits');
+    Route::get('/', 'TwilioController@answer');
+    Route::post('/', 'TwilioController@findContact');
 
-    $fetch = Contact::where('dial_profile', 'LIKE', $digits .'%')->get();
+});
 
-    $contact = $fetch[0];
+#APIV1 Routes
+Route::group(['prefix' => 'apiv1'], function(){
 
-    $spoken_num = implode(' ', str_split($contact->number));
-
-    $twiml = new Services_Twilio_Twiml;
-    $twiml->say('Okay, I found your contact ' . $contact->name . ' based on the digits you pressed!  I\'ll call them at ' . $spoken_num . '.');
-    $twiml->dial('+1' . $contact->number , array(
-        'callerId' => '+12025099421',
-    ));
-
-    $response = Response::make($twiml, 200);
-    $response->header('Content-Type', 'text/xml');
-    return $response;
-
+    Route::get('/token', 'Apiv1Controller@token');
 
 });
 

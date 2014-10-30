@@ -7,90 +7,39 @@ class TwilioController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function answer()
 	{
-        $sid = "AC685a150b41abf533cae4bca0319d3c0b"; // Your Account SID from www.twilio.com/user/account
-        $token = "d2a703623efd92b7fe1d980bf1e812d4"; // Your Auth Token from www.twilio.com/user/account
 
-        $client = new Services_Twilio($sid, $token);
-        $call = $client->account->calls->create(
-            '2025099421', // From a valid Twilio number
-            '5713589825' // Call this number
-        );
+        $twiml = new Services_Twilio_Twiml();
 
-        return $call;
+        $gather = $twiml->gather(['numDigits' => 50]);
+        $gather->say("Hello Caller, please enter the name of the person you're trying to reach, followed by the pound sign.");
+
+        return $twiml;
 
 	}
 
+    public function findContact()
+    {
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+        $digits = Input::get('Digits');
 
+        $fetch = Contact::where('dial_profile', 'LIKE', $digits .'%')->get();
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+        $contact = $fetch[0];
 
+        $spoken_num = implode(' ', str_split($contact->number));
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+        $twiml = new Services_Twilio_Twiml;
+        $twiml->say('Okay, I found your contact ' . $contact->name . ' based on the digits you pressed!  I\'ll call them at ' . $spoken_num . '.');
+        $twiml->dial('+1' . $contact->number , array(
+            'callerId' => '+12025099421',
+        ));
 
+        $response = Response::make($twiml, 200);
+        $response->header('Content-Type', 'text/xml');
+        return $response;
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
+    }
 
 }
