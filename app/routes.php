@@ -102,7 +102,11 @@ Route::group(['prefix' => 'twilio'], function(){
 #APIV1 Routes
 Route::group(['prefix' => 'apiv1'], function(){
 
-    Route::get('/token', 'Apiv1Controller@token');
+    #CSRF Creation Method
+    Route::get('/token', 'TokenController@create');
+
+    #Create Contacts API
+    Route::resource('contacts', 'APIContactController');
 
 });
 
