@@ -2,6 +2,23 @@
 
 class ContactController extends \BaseController {
 
+    /**
+     * User Model
+     * @var User
+     */
+    protected $user;
+
+    /**
+     * Inject the models.
+     * @param User $user
+     */
+    public function __construct(User $user)
+    {
+        parent::__construct();
+
+        $this->user = $user;
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -10,19 +27,22 @@ class ContactController extends \BaseController {
 	public function index()
 	{
 
+        // Get current user and check permission
+        $user = $this->user->currentUser();
+
         // get all the contacts
-        if (Auth::user()->username == 'admin') {
+        if ($user->hasRole('admin') == 'admin') {
 
             $contacts = Contact::all();
 
         // get just the users contacts
         } else {
 
-            $contacts = Auth::user()->contacts;
+            $contacts = $user->contacts;
 
         }
 
-        // load the view and pass the nerds
+        // load the view and pass the contacts
         return View::make('contacts.index')
             ->with('contacts', $contacts);
 	}
@@ -46,10 +66,13 @@ class ContactController extends \BaseController {
 	 */
 	public function store()
 	{
+        // Get current user
+        $user = $this->user->currentUser();
+        
         // validate
         $rules = [
-            'name' => 'required',
-            'number' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
         ];
 
         $validator = Validator::make(Input::all(), $rules);
@@ -63,11 +86,13 @@ class ContactController extends \BaseController {
 
             // store
             $contact = new Contact;
-            $contact->name = Input::get('name');
+            $contact->firstname = Input::get('firstname');
+            $contact->lastname = Input::get('lastname');
             $contact->number = Input::get('number');
-            $contact->user_id = Auth::user()->id;
+            $contact->user_id = $user->id;
+            $name = $contact->firstname . $contact->lastname;
 
-            foreach (str_split($contact->name) as $i)
+            foreach (str_split($name) as $i)
             {
                 $profile[] = DB::table('keymaps')->where('letter',strtoupper($i))->pluck('number');
             }
@@ -92,10 +117,10 @@ class ContactController extends \BaseController {
 	 */
 	public function show($id)
 	{
-        // get the nerd
+        // get the contact
         $contact = Contact::find($id);
 
-        // show the view and pass the nerd to it
+        // show the view and pass the contact to it
         return View::make('contacts.show')
             ->with('contact', $contact);
 	}
@@ -109,10 +134,10 @@ class ContactController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-        // get the nerd
+        // get the contact
         $contact = Contact::find($id);
 
-        // show the edit form and pass the nerd
+        // show the edit form and pass the contact
         return View::make('contacts.edit')
             ->with('contact', $contact);
 	}
@@ -128,8 +153,8 @@ class ContactController extends \BaseController {
 	{
         // validate
         $rules = [
-            'name' => 'required',
-            'number' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
         ];
 
         $validator = Validator::make(Input::all(), $rules);
@@ -142,9 +167,11 @@ class ContactController extends \BaseController {
         } else {
             // store
             $contact = Contact::find($id);
-            $contact->name = Input::get('name');
+            $contact->firstname = Input::get('firstname');
+            $contact->lastname = Input::get('lastname');
+            $name = $contact->firstname . $contact->lastname;
 
-            foreach (str_split($contact->name) as $i)
+            foreach (str_split($name) as $i)
             {
                 $profile[] = DB::table('keymaps')->where('letter',strtoupper($i))->pluck('number');
             }
@@ -172,8 +199,8 @@ class ContactController extends \BaseController {
 	public function destroy($id)
 	{
         // delete
-        $nerd = Contact::find($id);
-        $nerd->delete();
+        $contact = Contact::find($id);
+        $contact->delete();
 
         // redirect
         Session::flash('message', 'Successfully deleted the contact!');

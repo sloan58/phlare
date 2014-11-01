@@ -11,4 +11,11 @@ class Contact extends Eloquent
         return $this->hasMany('Contact');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function numbers()
+    {
+        return $this->hasMany('Number');
+    }
 }
