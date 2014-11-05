@@ -86,9 +86,21 @@ class ContactController extends \BaseController {
         } else {
 
             // store
+
+            $name = Input::get('firstname') . Input::get('lastname');
+
+            foreach (str_split($name) as $i)
+            {
+                $profile[] = DB::table('keymaps')->where('letter',strtoupper($i))->pluck('number');
+            }
+
+            $dial_profile = implode($profile);
+
             $contact = Contact::create([
+
                 'firstname' => Input::get('firstname'),
                 'lastname' => Input::get('lastname'),
+                'dial_profile' => $dial_profile,
                 'user_id' => $user->id,
 
             ]);
@@ -98,18 +110,6 @@ class ContactController extends \BaseController {
                 'label' => Input::get('label'),
                 'contact_id' => $contact->id
             ]);
-
-            $name = $contact->firstname . $contact->lastname;
-
-            foreach (str_split($name) as $i)
-            {
-                $profile[] = DB::table('keymaps')->where('letter',strtoupper($i))->pluck('number');
-            }
-
-            $dial_profile = implode($profile);
-
-            $contact->dial_profile = $dial_profile;
-            $contact->save();
 
             // redirect
             Session::flash('message', 'Successfully created contact!');
