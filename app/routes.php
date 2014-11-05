@@ -51,6 +51,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 
     # Admin Dashboard
     Route::controller('/', 'AdminDashboardController');
+
 });
 
 
@@ -84,10 +85,14 @@ Route::get('contact-us', function()
     return View::make('site/contact-us');
 });
 
-#Contacts Route
+#Auth Protected Routes
 Route::group(array('before'=>'auth'), function() {
 
+    #Contacts Routes
     Route::resource('contacts', 'ContactController');
+
+    #Numbers Routes
+    Route::resource('numbers', 'NumberController');
 
 });
 
@@ -96,6 +101,7 @@ Route::group(['prefix' => 'twilio'], function(){
 
     Route::get('/', 'TwilioController@answer');
     Route::post('/', 'TwilioController@findContact');
+    Route::get('/chosen-match', 'TwilioController@chosenMatch');
 
 });
 

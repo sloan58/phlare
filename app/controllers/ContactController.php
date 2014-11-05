@@ -30,7 +30,7 @@ class ContactController extends \BaseController {
         // Get current user and check permission
         $user = $this->user->currentUser();
 
-        // get all the contacts
+        //get all the contacts
         if ($user->hasRole('admin') == 'admin') {
 
             $contacts = Contact::all();
@@ -38,13 +38,14 @@ class ContactController extends \BaseController {
         // get just the users contacts
         } else {
 
-            $contacts = $user->contacts;
+            $contacts = User::find($user->id);
 
         }
 
         // load the view and pass the contacts
         return View::make('contacts.index')
-            ->with('contacts', $contacts);
+            ->with('user', $user);
+
 	}
 
 
@@ -85,11 +86,19 @@ class ContactController extends \BaseController {
         } else {
 
             // store
-            $contact = new Contact;
-            $contact->firstname = Input::get('firstname');
-            $contact->lastname = Input::get('lastname');
-            $contact->number = Input::get('number');
-            $contact->user_id = $user->id;
+            $contact = Contact::create([
+                'firstname' => Input::get('firstname'),
+                'lastname' => Input::get('lastname'),
+                'user_id' => $user->id,
+
+            ]);
+
+            Number::create([
+                'number' => Input::get('number'),
+                'label' => Input::get('label'),
+                'contact_id' => $contact->id
+            ]);
+
             $name = $contact->firstname . $contact->lastname;
 
             foreach (str_split($name) as $i)
@@ -180,7 +189,6 @@ class ContactController extends \BaseController {
 
             $contact->dial_profile = $dial_profile;
 
-            $contact->number = Input::get('number');
             $contact->save();
 
             // redirect

@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder {
 //        $this->call('UsersTableSeeder');
 //        $this->call('RolesTableSeeder');
 //        $this->call('PermissionsTableSeeder');
-        $this->call('KeymapsTableSeeder');
+//        $this->call('KeymapsTableSeeder');
     }
 
 }

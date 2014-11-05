@@ -26,15 +26,74 @@ class TwilioController extends \BaseController {
 
         $fetch = Contact::where('dial_profile', 'LIKE', $digits .'%')->get();
 
-        $contact = $fetch[0];
+        if (count($fetch) > 1)
+        {
 
-        $spoken_num = implode(' ', str_split($contact->number));
+            $sentence = '';
+
+            for ($i=0;$i<count($fetch);$i++)
+            {
+                $key = $i + 1;
+                $sentence .= "For " . $fetch[$i]->firstname . " " . $fetch[$i]->lastname . ", press " . $key . ". ";
+
+            }
+
+            $twiml = new Services_Twilio_Twiml();
+
+            $gather = $twiml->gather([
+                'method' => 'GET',
+                'action' => 'twilio/chosen-match?dial-profile=' . $digits,
+                'numDigits' => 1
+            ]);
+            $gather->say(
+                "The name you've entered has returned " . count($fetch) . " results. " . $sentence
+            );
+
+            return $twiml;
+
+
+        } elseif ($fetch === 1) {
+
+            $contact = $fetch[0];
+
+            $spoken_num = implode(' ', str_split($contact->numbers[0]->number));
+
+            $twiml = new Services_Twilio_Twiml;
+            $twiml->say('Okay, I found your contact ' . $contact->name . ' based on the digits you pressed!  I\'ll call them at ' . $spoken_num . '.');
+            $twiml->dial('+1' . $contact->numbers[0]->number , [
+                'callerId' => '+12025099421',
+            ]);
+
+            $response = Response::make($twiml, 200);
+            $response->header('Content-Type', 'text/xml');
+            return $response;
+
+        } else {
+
+            //Sorry, we didn't find that contact.  Please try again
+        }
+
+        return count($fetch);
+
+    }
+
+    public function chosenMatch()
+    {
+
+        $index = Input::get('Digits') - 1;
+        $dial_profile = Input::get('dial-profile');
+
+        $fetch = Contact::where('dial_profile', 'LIKE', $dial_profile .'%')->get();
+
+        $contact = $fetch[$index];
+
+        $spoken_num = implode(' ', str_split($contact->numbers[0]->number));
 
         $twiml = new Services_Twilio_Twiml;
         $twiml->say('Okay, I found your contact ' . $contact->name . ' based on the digits you pressed!  I\'ll call them at ' . $spoken_num . '.');
-        $twiml->dial('+1' . $contact->number , array(
+        $twiml->dial('+1' . $contact->numbers[0]->number , [
             'callerId' => '+12025099421',
-        ));
+        ]);
 
         $response = Response::make($twiml, 200);
         $response->header('Content-Type', 'text/xml');

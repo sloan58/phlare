@@ -1,14 +1,17 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model as Eloquent;
+
 class Number extends Eloquent
 {
+    protected $fillable = ['number','label','contact_id'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function numbers()
+    public function contacts()
     {
-        return $this->hasMany('Number');
+        return $this->belongsTo('Contact');
     }
 
 }

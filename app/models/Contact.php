@@ -1,14 +1,18 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model as Eloquent;
+
+
 class Contact extends Eloquent
 {
+    protected $fillable = ['firstname','lastname','dial_profile','user_id'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function contacts()
+    public function users()
     {
-        return $this->hasMany('Contact');
+        return $this->belongsTo('User');
     }
 
     /**
@@ -17,5 +21,15 @@ class Contact extends Eloquent
     public function numbers()
     {
         return $this->hasMany('Number');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function($contact)
+        {
+            $contact->numbers()->delete();
+        });
     }
 }

@@ -111,4 +111,24 @@ class User extends ConfideUser implements UserInterface, RemindableInterface{
     {
         return $this->hasMany('Contact');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function numbers()
+    {
+        return $this->hasManyThrough('Number','Contact');
+    }
+
+    //Cascade User delete to the users contacts
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function($user)
+        {
+            $user->contacts()->delete();
+        });
+    }
+
 }

@@ -16,15 +16,25 @@
 
         {{ Form::open(array('url' => 'contacts')) }}
 
-            <div class="form-group">
-                {{ Form::label('name', 'Name') }}
-                {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
-            </div>
+           <div class="form-group">
+                       {{ Form::label('firstname', 'First Name') }}
+                       {{ Form::text('firstname', null, array('class' => 'form-control')) }}
+                   </div>
 
-            <div class="form-group">
-                {{ Form::label('number', 'Telephone Number') }}
-                {{ Form::text('number', Input::old('number'), array('class' => 'form-control')) }}
-            </div>
+                   <div class="form-group">
+                       {{ Form::label('lastname', 'Last Name') }}
+                       {{ Form::text('lastname', null, array('class' => 'form-control')) }}
+                   </div>
+
+                   <div class="form-group">
+                       {{ Form::label('number', 'Telephone Number') }}
+                       {{ Form::text('number', null, array('class' => 'form-control')) }}
+                   </div>
+
+                   <div class="form-group">
+                       {{ Form::label('label', 'Label') }}
+                       {{ Form::text('label', null, array('class' => 'form-control')) }}
+                   </div>
 
             {{ Form::submit('Create the contact!', array('class' => 'btn btn-primary')) }}
 
