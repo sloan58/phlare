@@ -52,14 +52,14 @@ class TwilioController extends \BaseController {
             return $twiml;
 
 
-        } elseif ($fetch === 1) {
+        } elseif (count($fetch) === 1) {
 
             $contact = $fetch[0];
 
             $spoken_num = implode(' ', str_split($contact->numbers[0]->number));
 
             $twiml = new Services_Twilio_Twiml;
-            $twiml->say('Okay, I found your contact ' . $contact->name . ' based on the digits you pressed!  I\'ll call them at ' . $spoken_num . '.');
+            $twiml->say('Okay, I found your contact ' . $contact->firstname . ' ' . $contact->lastname . ' based on the digits you pressed!  I\'ll call them at ' . $spoken_num . '.');
             $twiml->dial('+1' . $contact->numbers[0]->number , [
                 'callerId' => '+12025099421',
             ]);
@@ -70,10 +70,13 @@ class TwilioController extends \BaseController {
 
         } else {
 
-            //Sorry, we didn't find that contact.  Please try again
-        }
+            $twiml = new Services_Twilio_Twiml();
 
-        return count($fetch);
+            $gather = $twiml->gather(['numDigits' => 50]);
+            $gather->say("Sorry, I didn't find a contact based on the digits you pressed.  Please enter the name of the person you're trying to reach, followed by the pound sign.");
+
+            return $twiml;
+        }
 
     }
 
@@ -90,7 +93,7 @@ class TwilioController extends \BaseController {
         $spoken_num = implode(' ', str_split($contact->numbers[0]->number));
 
         $twiml = new Services_Twilio_Twiml;
-        $twiml->say('Okay, I found your contact ' . $contact->name . ' based on the digits you pressed!  I\'ll call them at ' . $spoken_num . '.');
+        $twiml->say('Okay, I found your contact ' . $contact->firstname . ' ' . $contact->lastname . ' based on the digits you pressed!  I\'ll call them at ' . $spoken_num . '.');
         $twiml->dial('+1' . $contact->numbers[0]->number , [
             'callerId' => '+12025099421',
         ]);
