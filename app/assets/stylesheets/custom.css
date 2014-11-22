@@ -1,0 +1,23 @@
+.fa-fire {
+    color: red;
+    background:transparent;
+    box-shadow: 0px 0px 65px #fff;
+}
+.slab {
+    font-family: 'Josefin Slab', serif;
+    font-weight: bold;
+    font-size: 100px;
+    color: white;
+}
+
+.jumbotron {
+    background-image: url(../assets/tweed.png);
+    padding-top: 35px;
+}
+
+.jumbotron-icon {
+    font-size: 180px;
+}
+.top-buffer {
+    margin-top:40px;
+}

@@ -10,7 +10,7 @@
     @if (!Auth::check())
     <div class="col-lg-10 col-lg-offset-1">
         <div class="jumbotron jumbotron-icon text-center">
-            <i class="fa fa-fire "></i>
+            <i class="fa fa-fire"></i>
             <span class="blue slab">Phlare</span>
         </div>
         <div class="row">

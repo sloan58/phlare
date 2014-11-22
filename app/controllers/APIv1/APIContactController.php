@@ -15,6 +15,8 @@ class APIContactController extends \BaseController {
         // Get the content from it
         $content = $request->getContent();
 
+        Log::info($content);
+
         return $content;
 
 	}

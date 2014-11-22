@@ -114,11 +114,13 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Illuminate\Remote\RemoteServiceProvider',
-		
+
+
         /* Additional Providers */
         'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
         'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
         'Bllim\Datatables\DatatablesServiceProvider', // Datatables
+        'Codesleeve\AssetPipeline\AssetPipelineServiceProvider', //Asset Pipeline
 
         /* Uncomment for use in development */
         'Way\Generators\GeneratorsServiceProvider', // Generators

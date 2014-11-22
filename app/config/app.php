@@ -119,10 +119,7 @@ return array(
         'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
         'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
         'Bllim\Datatables\DatatablesServiceProvider', // Datatables
-
-        /* Uncomment for use in development */
-//        'Way\Generators\GeneratorsServiceProvider', // Generators
-//        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
+        'Codesleeve\AssetPipeline\AssetPipelineServiceProvider', //Asset Pipeline
 
     ),
 

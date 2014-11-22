@@ -19,10 +19,12 @@
 
 		<!-- CSS
 		================================================== -->
-        <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/sticky-footer-navbar.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
+		{{ stylesheet_link_tag() }}
+        {{--<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">--}}
+        {{--<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">--}}
+        {{--<link rel="stylesheet" href="{{asset('bootstrap/css/modern-business.css')}}">--}}
+        {{--<link rel="stylesheet" href="{{asset('assets/css/sticky-footer-navbar.css')}}">--}}
+        {{--<link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">--}}
 
         <!--CDN CSS-->
 
@@ -31,7 +33,7 @@
 
 		<style>
         body {
-            padding: 60px 0;
+            padding: 80px 0;
         }
 		@section('styles')
 		@show
@@ -115,8 +117,9 @@
 
 		<!-- Javascripts
 		================================================== -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+		{{ javascript_include_tag()  }}
+        {{--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>--}}
+        {{--<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>--}}
 
         @yield('scripts')
 	</body>
