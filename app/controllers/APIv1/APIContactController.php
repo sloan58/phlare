@@ -2,6 +2,7 @@
 
 class APIContactController extends \BaseController {
 
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -9,6 +10,7 @@ class APIContactController extends \BaseController {
 	 */
 	public function store()
 	{
+
         // Fetch the Request instance
         $request = Request::instance();
 
@@ -16,6 +18,7 @@ class APIContactController extends \BaseController {
         $content = $request->getContent();
 
         Log::info($content);
+        var_dump($content);
 
         return $content;
 
