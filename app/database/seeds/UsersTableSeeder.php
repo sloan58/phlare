@@ -19,8 +19,12 @@ class UsersTableSeeder extends Seeder {
             ),
             array(
                 'username'      => 'user',
+                'firstname' => 'sample',
+                'lastname' => 'user',
                 'email'      => 'user@example.org',
                 'password'   => Hash::make('user'),
+                'account_number' => '2028055054',
+                'pin' => '5197',
                 'confirmed'   => 1,
                 'confirmation_code' => md5(microtime().Config::get('app.key')),
                 'created_at' => new DateTime,

@@ -13,18 +13,98 @@ class TwilioController extends \BaseController {
         $twiml = new Services_Twilio_Twiml();
 
         $gather = $twiml->gather(['numDigits' => 50]);
-        $gather->say("Hello Caller, please enter the name of the person you're trying to reach, followed by the pound sign.");
+        $gather->say("Hello, thanks for calling Phlare.  Please enter your account number, followed by the pound sign.");
 
         return $twiml;
 
 	}
+
+    public function checkAccountNumber()
+    {
+
+        $twiml = new Services_Twilio_Twiml();
+
+        $account_number = Input::get('Digits');
+
+        $fetch = User::where('account_number', '=', $account_number)->get();
+
+        if (count($fetch) === 1)
+        {
+
+            $user = $fetch[0];
+
+            $gather = $twiml->gather([
+            'method' => 'GET',
+            'action' => "twilio/auth-caller?account_number=$account_number",
+            'numDigits' => 4
+            ]);
+
+            $gather->say("Ok, I found your account, " . $user->firstname . ".  Please enter your PIN, followed by the pound sign.");
+
+            return $twiml;
+
+        } else {
+
+
+            $gather = $twiml->gather(['numDigits' => 50]);
+            $gather->say("Sorry, I could not locate your account.  Please re-enter your account number, followed by the pound sign.");
+
+            return $twiml;
+
+        }
+
+    }
+
+    public function authCaller()
+    {
+
+        $pin = Input::get('Digits');
+
+        $account_number = Input::get('account_number');
+
+        $twiml = new Services_Twilio_Twiml();
+
+        $fetch = User::where('account_number', $account_number)->where('pin', $pin)->get();
+
+        if (count($fetch) === 1)
+        {
+
+            $user = $fetch[0];
+
+            $gather = $twiml->gather([
+                'method' => 'POST',
+                'action' => "twilio/find-contact?id=$user->id",
+                'numDigits' => 10
+            ]);
+
+            $gather->say("Thank you.  Please type in the first and last name of the contact you'd like to reach, followed by the pound sign");
+
+            return $twiml;
+
+        } else {
+
+            $gather = $twiml->gather([
+                'method' => 'GET',
+                'action' => "twilio/auth-caller?user_id=$account_number",
+                'numDigits' => 4
+            ]);
+
+            $gather->say("Sorry, the PIN you entered is incorrect.  Please re-enter your PIN, followed by the pound sign.");
+
+            return $twiml;
+
+        }
+
+    }
 
     public function findContact()
     {
 
         $digits = Input::get('Digits');
 
-        $fetch = Contact::where('dial_profile', 'LIKE', $digits .'%')->get();
+        $user_id = Input::get('id');
+
+        $fetch = Contact::where('dial_profile', 'LIKE', $digits .'%')->where('user_id', $user_id)->get();
 
         if (count($fetch) > 1)
         {

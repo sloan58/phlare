@@ -9,6 +9,9 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends ConfideUser implements UserInterface, RemindableInterface{
+
+    protected $fillable = ['firstname', 'lastname', 'account_number', 'pin'];
+
     use HasRole;
 
     /**
@@ -19,6 +22,16 @@ class User extends ConfideUser implements UserInterface, RemindableInterface{
     public function getUserByUsername( $username )
     {
         return $this->where('username', '=', $username)->first();
+    }
+
+    /**
+     * Get user by account_number
+     * @param $account_number
+     * @return mixed
+     */
+    public function getUserByAccountNumber( $account_number )
+    {
+        return $this->where('account_number', '=', $account_number)->first();
     }
 
     /**

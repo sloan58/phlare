@@ -82,6 +82,6 @@
             @endforeach
             </tbody>
         </table>
-        <a class="btn btn-small btn-success" href="{{ URL::to('numbers/create?contactId=' . $contact->id) }}">Add Phone Number</a>
+        {{--<a class="btn btn-small btn-success" href="{{ URL::to('numbers/create?contactId=' . $contact->id) }}">Add Phone Number</a>--}}
     </div>
 </div>

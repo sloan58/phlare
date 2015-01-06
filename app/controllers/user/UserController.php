@@ -97,6 +97,10 @@ class UserController extends BaseController {
             $oldUser = clone $user;
             $user->username = Input::get( 'username' );
             $user->email = Input::get( 'email' );
+            $user->firstname = Input::get( 'firstname' );
+            $user->lastname = Input::get( 'lastname' );
+            $user->account_number = Input::get( 'account_number' );
+            $user->pin = Input::get( 'pin' );
 
             $password = Input::get( 'password' );
             $passwordConfirmation = Input::get( 'password_confirmation' );
