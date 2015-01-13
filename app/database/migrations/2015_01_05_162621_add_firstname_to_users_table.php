@@ -15,7 +15,7 @@ class AddFirstnameToUsersTable extends Migration {
 		Schema::table('users', function(Blueprint $table)
 		{
 
-            $table->string('firstname', 255)->after('username');
+            $table->string('firstname', 255)->after('username')->nullable();
 
         });
 	}
