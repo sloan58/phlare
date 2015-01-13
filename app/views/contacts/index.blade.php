@@ -26,41 +26,78 @@
         @if (Session::has('message'))
             <div class="alert alert-info">{{ Session::get('message') }}</div>
         @endif
+            @if (isset($contacts))
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Created By</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($contacts as $key => $value)
+                    <tr>
+                        <td>{{ $value->firstname }}</td>
+                        <td>{{ $value->lastname }}</td>
+                        <td>{{ $value->username }}</td>
 
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <td>First Name</td>
-                    <td>Last Name</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach($user->contacts as $key => $value)
-                <tr>
-                    <td>{{ $value->firstname }}</td>
-                    <td>{{ $value->lastname }}</td>
+                        <!-- we will also add show, edit, and delete buttons -->
+                        <td>
 
-                    <!-- we will also add show, edit, and delete buttons -->
-                    <td>
+                            <!-- edit this contact(uses the edit method found at GET /contact/{id}/edit -->
+                            <div class="col-md-2">
+                                <a class="btn btn-small btn-primary" href="{{ URL::to('contacts/' . $value->id . '/edit') }}">Edit</a>
+                            </div>
 
-                        <!-- edit this contact(uses the edit method found at GET /contact/{id}/edit -->
-                        <div class="col-md-2">
-                            <a class="btn btn-small btn-primary" href="{{ URL::to('contacts/' . $value->id . '/edit') }}">Edit</a>
-                        </div>
-
-                        <!-- delete the contact (uses the destroy method DESTROY /contacts/{id} -->
-                        <div class="col-md-2">
-                            {{ Form::open(array('url' => 'contacts/' . $value->id, 'class' => '')) }}
-                                {{ Form::hidden('_method', 'DELETE') }}
-                                {{ Form::submit('Delete', array('class' => 'btn btn-warning')) }}
-                            {{ Form::close() }}
-                        </div>
+                            <!-- delete the contact (uses the destroy method DESTROY /contacts/{id} -->
+                            <div class="col-md-2">
+                                {{ Form::open(array('url' => 'contacts/' . $value->id, 'class' => '')) }}
+                                    {{ Form::hidden('_method', 'DELETE') }}
+                                    {{ Form::submit('Delete', array('class' => 'btn btn-warning')) }}
+                                {{ Form::close() }}
+                            </div>
 
 
-                    </td>
-                </tr>
-            @endforeach
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                @foreach($user->contacts as $key => $value)
+                    <tr>
+                        <td>{{ $value->firstname }}</td>
+                        <td>{{ $value->lastname }}</td>
+
+                        <!-- we will also add show, edit, and delete buttons -->
+                        <td>
+
+                            <!-- edit this contact(uses the edit method found at GET /contact/{id}/edit -->
+                            <div class="col-md-2">
+                                <a class="btn btn-small btn-primary" href="{{ URL::to('contacts/' . $value->id . '/edit') }}">Edit</a>
+                            </div>
+
+                            <!-- delete the contact (uses the destroy method DESTROY /contacts/{id} -->
+                            <div class="col-md-2">
+                                {{ Form::open(array('url' => 'contacts/' . $value->id, 'class' => '')) }}
+                                    {{ Form::hidden('_method', 'DELETE') }}
+                                    {{ Form::submit('Delete', array('class' => 'btn btn-warning')) }}
+                                {{ Form::close() }}
+                            </div>
+
+
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
             </tbody>
         </table>
     </div>

@@ -153,6 +153,7 @@ class NumberController extends \BaseController {
             // redirect
             Session::flash('message', 'Successfully updated number!');
             return Redirect::to('contacts/' . $number->contact_id . '/edit');
+
         }
 	}
 

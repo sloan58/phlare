@@ -7,13 +7,13 @@
     font-family: 'Josefin Slab', serif;
     font-weight: bold;
     font-size: 100px;
-    color: white;
+    color: black;
 }
 
-.jumbotron {
-    background-image: url(../assets/tweed.png);
-    padding-top: 35px;
-}
+/*.jumbotron {*/
+    /*background-image: url(../assets/tweed.png);*/
+    /*padding-top: 35px;*/
+/*}*/
 
 .jumbotron-icon {
     font-size: 180px;
@@ -26,6 +26,6 @@
     color: #ff0000;
 }
 
-#sign-up {
-    color: limegreen;
+.ubuntu {
+    font-family: 'Ubuntu', sans-serif;
 }

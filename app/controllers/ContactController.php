@@ -35,16 +35,26 @@ class ContactController extends \BaseController {
 
             $contacts = Contact::all();
 
+            foreach ($contacts as $k => $v)
+            {
+
+                $user = User::find($v->user_id);
+
+                $v->username = $user->username;
+
+            }
+
+            return View::make('contacts.index')
+                ->with('contacts', $contacts);
+
         // get just the users contacts
         } else {
 
-            $contacts = User::find($user->id);
+            // load the view and pass the contacts
+            return View::make('contacts.index')
+                ->with('user', $user);
 
         }
-
-        // load the view and pass the contacts
-        return View::make('contacts.index')
-            ->with('user', $user);
 
 	}
 

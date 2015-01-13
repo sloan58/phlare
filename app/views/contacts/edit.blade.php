@@ -21,6 +21,9 @@
 
     <div class="col-md-2 col-md-offset-1 top-buffer">
 
+        <div class="btn btn-default"><a href="{{{ URL::to('contacts') }}}">Back to Contacts</a></div>
+        <hr/>
+
         <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
 
