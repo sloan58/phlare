@@ -34,7 +34,7 @@
 
 		<style>
         body {
-            padding: 30px 0;
+            padding: 60px 0;
         }
 		@section('styles')
 		@show
@@ -78,7 +78,7 @@
                     </ul>
                     @endif
                     <ul class="nav navbar-nav">
-                        <li><a href="" id="phone-number">1-800-4-PHLARE</a></li>
+                        <li><a href="" id="phone-number">1 (202) 509-9421</a></li>
                     </ul>
                     <ul class="nav navbar-nav pull-right">
                         @if (Auth::check())

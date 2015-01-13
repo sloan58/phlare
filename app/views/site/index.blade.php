@@ -22,7 +22,7 @@
             </div>
             <div class="col-lg-6">
                 <h2 class="text-center">How does it work?</h2>
-                <p class="ubuntu">We store the contacts you create online and when you call Phlare, we can look up your contacts and dial them for you.  Call us from a pay phone, office phone or cell phone.  We'll keep your contacts stored so you can always reach them!</p>
+                <p class="ubuntu">We store the contacts you create online and when you call Phlare, we can look up your contacts and dial them for you.  Call us from any phone and we'll keep your contacts stored online so you can always reach them.</p>
                 {{--<p><a class="btn btn-primary" href="#" role="button">View details »</a></p>--}}
             </div>
             {{--<div class="col-lg-4">--}}
