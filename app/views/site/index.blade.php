@@ -35,9 +35,9 @@
     </div>
     @else
     <div class="col-lg-10 col-lg-offset-1">
-        <div class="jumbotron jumbotron-icon text-center">
+        <div class="jumbotron-icon text-center">
             <i class="fa fa-fire "></i>
-            <span class="blue slab">Phlare</span>
+            <span class="blue slab" style="color: black">Phlare</span>
         </div>
     </div>
     @endif
