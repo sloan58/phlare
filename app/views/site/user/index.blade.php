@@ -26,11 +26,12 @@ body {
         <!-- ./ csrf token -->
         <!-- General tab -->
         <div class="tab-pane active" id="tab-general">
+
             <!-- username -->
             <div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
                 <label class="col-md-2 control-label" for="username">Username</label>
                 <div class="col-md-10">
-                    <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}" disabled/>
+                    <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}" readonly/>
                     {{ $errors->first('username', '<span class="help-inline">:message</span>') }}
                 </div>
             </div>
@@ -50,7 +51,7 @@ body {
                 <div class="form-group {{{ $errors->has('lastname') ? 'error' : '' }}}">
                     <label class="col-md-2 control-label" for="lastname">Last Name</label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" name="lastname" id="lastname" value="{{{ Input::old('lastname', $user->lastnamee) }}}" />
+                        <input class="form-control" type="text" name="lastname" id="lastname" value="{{{ Input::old('lastname', $user->lastname) }}}" />
                         {{ $errors->first('lastname', '<span class="help-inline">:message</span>') }}
                     </div>
                 </div>
@@ -60,7 +61,7 @@ body {
             <div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
                 <label class="col-md-2 control-label" for="email">Email</label>
                 <div class="col-md-10">
-                    <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" disabled/>
+                    <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" readonly/>
                     {{ $errors->first('email', '<span class="help-inline">:message</span>') }}
                 </div>
             </div>

@@ -88,12 +88,16 @@ class UserController extends BaseController {
      */
     public function postEdit($user)
     {
+
         // Validate the inputs
         $validator = Validator::make(Input::all(), $user->getUpdateRules());
 
+        Log::error([Input::all()]);
+        Log::error([$user->getUpdateRules()]);
 
         if ($validator->passes())
         {
+
             $oldUser = clone $user;
             $user->username = Input::get( 'username' );
             $user->email = Input::get( 'email' );

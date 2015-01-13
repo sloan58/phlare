@@ -73,7 +73,7 @@ class TwilioController extends \BaseController {
 
             $gather = $twiml->gather([
                 'method' => 'POST',
-                'action' => "twilio/find-contact?id=$user->id",
+                'action' => "find-contact?id=$user->id",
                 'numDigits' => 10
             ]);
 
@@ -122,7 +122,7 @@ class TwilioController extends \BaseController {
 
             $gather = $twiml->gather([
                 'method' => 'GET',
-                'action' => 'twilio/chosen-match?dial-profile=' . $digits,
+                'action' => 'chosen-match?dial-profile=' . $digits,
                 'numDigits' => 1
             ]);
             $gather->say(
