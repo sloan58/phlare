@@ -100,8 +100,9 @@ Route::group(array('before'=>'auth'), function() {
 Route::group(['prefix' => 'twilio'], function(){
 
     Route::get('/', 'TwilioController@answer');
-    Route::post('/', 'TwilioController@checkAccountNumber');
+    Route::get('/check-account', 'TwilioController@checkAccount');
     Route::get('/auth-caller', 'TwilioController@authCaller');
+    Route::get('/find-contact', 'TwilioController@findContact');
     Route::post('/find-contact', 'TwilioController@findContact');
     Route::get('/chosen-match', 'TwilioController@chosenMatch');
 
