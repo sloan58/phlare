@@ -109,7 +109,7 @@ class TwilioController extends \BaseController {
 
         if ($digits == "TIMEOUT") {
 
-            $fetch = Contact::all($user_id);
+            $fetch = Contact::where('user_id',$user_id);
 
         } else {
 
