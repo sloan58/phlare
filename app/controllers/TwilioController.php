@@ -136,7 +136,7 @@ class TwilioController extends \BaseController {
                 'numDigits' => 1
             ]);
             $gather->say(
-                "The name you've entered has returned " . count($fetch) . " results. " . $sentence
+                "We found " . count($fetch) . " results. " . $sentence
             );
 
             return $twiml;
