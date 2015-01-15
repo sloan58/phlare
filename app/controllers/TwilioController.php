@@ -84,8 +84,7 @@ class TwilioController extends \BaseController {
 
             $gather = $twiml->gather([
                 'method' => 'GET',
-                'action' => "twilio/auth-caller?user_id=$account_number",
-                'numDigits' => 4
+                'action' => "auth-caller?account_number=$account_number",
             ]);
 
             $gather->say("Sorry, the PIN you entered is incorrect.  Please re-enter your PIN, followed by the pound sign.");
