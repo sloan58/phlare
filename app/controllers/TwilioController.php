@@ -36,7 +36,6 @@ class TwilioController extends \BaseController {
             $gather = $twiml->gather([
             'method' => 'GET',
             'action' => "twilio/auth-caller?account_number=$account_number",
-            'numDigits' => 4
             ]);
 
             $gather->say("Ok, I found your account, " . $user->firstname . ".  Please enter your PIN, followed by the pound sign.");
@@ -139,7 +138,7 @@ class TwilioController extends \BaseController {
             $spoken_num = implode(' ', str_split($contact->numbers[0]->number));
 
             $twiml = new Services_Twilio_Twiml;
-            $twiml->say('Okay, I found your contact ' . $contact->firstname . ' ' . $contact->lastname . ' based on the digits you pressed!  I\'ll call them at ' . $spoken_num . '.');
+            $twiml->say('Okay, I found your contact ' . $contact->firstname . ' ' . $contact->lastname . '!  I\'ll call them at ' . $spoken_num . '.');
             $twiml->dial('+1' . $contact->numbers[0]->number , [
                 'callerId' => '+12025099421',
             ]);
