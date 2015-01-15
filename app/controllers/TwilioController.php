@@ -12,7 +12,9 @@ class TwilioController extends \BaseController {
 
         $twiml = new Services_Twilio_Twiml();
 
-        $gather = $twiml->gather(['numDigits' => 50]);
+        $gather = $twiml->gather([
+
+        ]);
         $gather->say("Hello, thanks for calling Phlare.  Please enter your account number, followed by the pound sign.");
 
         return $twiml;
@@ -45,7 +47,9 @@ class TwilioController extends \BaseController {
         } else {
 
 
-            $gather = $twiml->gather(['numDigits' => 50]);
+            $gather = $twiml->gather([
+
+            ]);
             $gather->say("Sorry, I could not locate your account.  Please re-enter your account number, followed by the pound sign.");
 
             return $twiml;
@@ -73,10 +77,11 @@ class TwilioController extends \BaseController {
             $gather = $twiml->gather([
                 'method' => 'POST',
                 'action' => "find-contact?id=$user->id",
-                'numDigits' => 10
             ]);
 
-            $gather->say("Thank you.  Please type in the first and last name of the contact you'd like to reach, followed by the pound sign");
+            $twiml->redirect("find-contact?Digits=TIMEOUT");
+
+            $gather->say("Thank you.  Please type in the first and last name of the contact you'd like to reach.  You can press pound at any time and we'll find the contacts that match the digits you've pressed.");
 
             return $twiml;
 
@@ -99,10 +104,17 @@ class TwilioController extends \BaseController {
     {
 
         $digits = Input::get('Digits');
-
         $user_id = Input::get('id');
 
-        $fetch = Contact::where('dial_profile', 'LIKE', $digits .'%')->where('user_id', $user_id)->get();
+
+        if ($digits == "TIMEOUT") {
+
+            $fetch = Contact::all($user_id);
+
+        } else {
+
+            $fetch = Contact::where('dial_profile', 'LIKE', $digits . '%')->where('user_id', $user_id)->get();
+        }
 
         if (count($fetch) > 1)
         {
@@ -150,7 +162,10 @@ class TwilioController extends \BaseController {
 
             $twiml = new Services_Twilio_Twiml();
 
-            $gather = $twiml->gather(['numDigits' => 50]);
+            $gather = $twiml->gather([
+
+            ]);
+
             $gather->say("Sorry, I didn't find a contact based on the digits you pressed.  Please enter the name of the person you're trying to reach, followed by the pound sign.");
 
             return $twiml;
