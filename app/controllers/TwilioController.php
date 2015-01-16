@@ -200,7 +200,7 @@ class TwilioController extends \BaseController {
         $spoken_num = implode(' ', str_split($contact->numbers[0]->number));
 
         $twiml = new Services_Twilio_Twiml;
-        $twiml->say('Okay, I found your contact ' . $contact->firstname . ' ' . $contact->lastname . '!  I\'ll call them at ' . $spoken_num . '.');
+        $twiml->say('Okay, calling ' . $contact->firstname . ' ' . $contact->lastname . '!  I\'ll call them at ' . $spoken_num . '.');
         $twiml->dial(
             '+1' . $contact->numbers[0]->number,
                 [
