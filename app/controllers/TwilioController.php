@@ -106,17 +106,17 @@ class TwilioController extends \BaseController {
 
         $twiml = new Services_Twilio_Twiml();
 
-        $digits = Input::get('Digits');
+        $dial_profile = Input::get('Digits');
         $user_id = Input::get('id');
 
 
-        if (!$digits) {
+        if (!$dial_profile) {
 
             $fetch = Contact::where('user_id',$user_id)->get();
 
         } else {
 
-            $fetch = Contact::where('dial_profile', 'LIKE', $digits . '%')->where('user_id', $user_id)->get();
+            $fetch = Contact::where('dial_profile', 'LIKE', $dial_profile . '%')->where('user_id', $user_id)->get();
 
         }
 
@@ -134,9 +134,10 @@ class TwilioController extends \BaseController {
 
             $gather = $twiml->gather([
                 'method' => 'GET',
-                'action' => 'chosen-match?dial-profile=' . $digits,
+                'action' => 'chosen-match?dial-profile=' . $dial_profile . '&' . 'user-id=' . $user_id,
                 'numDigits' => 1
             ]);
+
             $gather->say(
                 "We found " . count($fetch) . " results. " . $sentence
             );
@@ -179,16 +180,27 @@ class TwilioController extends \BaseController {
     {
 
         $index = Input::get('Digits') - 1;
+
         $dial_profile = Input::get('dial-profile');
 
-        $fetch = Contact::where('dial_profile', 'LIKE', $dial_profile .'%')->get();
+        $user_id = Input::get('user-id');
+
+        if (!$dial_profile) {
+
+            $fetch = Contact::where('user_id',$user_id)->get();
+
+        } else {
+
+            $fetch = Contact::where('dial_profile', 'LIKE', $dial_profile . '%')->where('user_id', $user_id)->get();
+
+        }
 
         $contact = $fetch[$index];
 
         $spoken_num = implode(' ', str_split($contact->numbers[0]->number));
 
         $twiml = new Services_Twilio_Twiml;
-        $twiml->say('Okay, I found your contact ' . $contact->firstname . ' ' . $contact->lastname . ' based on the digits you pressed!  I\'ll call them at ' . $spoken_num . '.');
+        $twiml->say('Okay, I found your contact ' . $contact->firstname . ' ' . $contact->lastname . '!  I\'ll call them at ' . $spoken_num . '.');
         $twiml->dial(
             '+1' . $contact->numbers[0]->number,
                 [
