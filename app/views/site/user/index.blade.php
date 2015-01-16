@@ -2,8 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{{ Lang::get('user/user.settings') }}} ::
-@parent
+Phlare::{{{ Lang::get('user/user.settings') }}}
 @stop
 
 {{-- New Laravel 4 Feature in use --}}

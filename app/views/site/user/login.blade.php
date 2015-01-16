@@ -2,8 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{{ Lang::get('user/user.login') }}} ::
-@parent
+Phlare :: {{{ Lang::get('user/user.login') }}}
 @stop
 
 {{-- Content --}}

@@ -2,8 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{{ Lang::get('user/user.register') }}} ::
-@parent
+Phlare::Register
 @stop
 
 {{-- Content --}}
