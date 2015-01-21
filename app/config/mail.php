@@ -28,7 +28,7 @@ return array(
     |
     */
 
-    'host' => 'smtp.gmail.com',
+    'host' => 'smtp.office365.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
     |
     */
 
-    'port' => 465,
+    'port' => 587,
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
     |
     */
 
-    'from' => array('address' => 'martinsloan58@gmail.com', 'name' => 'Martin Sloan'),
+    'from' => array('address' => 'support@phlare.io', 'name' => 'Phlare Support'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return array(
     |
     */
 
-    'encryption' => 'ssl',
+    'encryption' => 'tls',
 
     /*
     |--------------------------------------------------------------------------

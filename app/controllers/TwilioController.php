@@ -41,7 +41,9 @@ class TwilioController extends \BaseController {
             'action' => 'auth-caller?account_number=' . $account_number,
             ]);
 
-            $gather->say("Ok, I found your account, " . $user->firstname . ".  Please enter your PIN, followed by the pound sign.");
+            $address_user = $user->firstname ? $user->firstname : $user->username;
+
+            $gather->say("Ok, I found your account, " . $address_user . ".  Please enter your PIN, followed by the pound sign.");
 
             return $twiml;
 

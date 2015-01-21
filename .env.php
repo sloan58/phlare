@@ -15,7 +15,7 @@ return [
     'DB_PASSWORD' => $password,
     'DB_NAME' => $database,
     'DB_DRIVER' => 'pgsql',
-    'MAIL_USERNAME' => 'phlare.info@gmail.com',
-    'MAIL_PASSWORD' => 'PhL@43!!'
+    'MAIL_USERNAME' => 'support@phlare.io',
+    'MAIL_PASSWORD' => '$l0whanD1223'
 
 ];
